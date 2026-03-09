@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment Pulse — Social Media Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">◇</span>
+        <h1>Sentiment Pulse</h1>
+        <span class="tagline">Social Media Intelligence</span>
+      </div>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+        <button class="nav-btn" data-view="comments">Comments</button>
+        <button class="nav-btn" data-view="preprocessing">Preprocessing</button>
+        <button class="nav-btn" data-view="categorization">Categorization</button>
+        <button class="nav-btn" data-view="analytics">Analytics</button>
+        <button class="nav-btn" data-view="pr-risks">PR Risks</button>
+        <button class="nav-btn" data-view="report">Executive Report</button>
+        <button class="nav-btn" data-view="highlights">Highlights</button>
+      </nav>
+    </header>
+
+    <main class="main">
+      <!-- Dashboard -->
+      <section id="view-dashboard" class="view active">
+        <div class="hero">
+          <h2>Understand Your Audience</h2>
+          <p>Automated sentiment analysis from Instagram with LLM-powered insights</p>
+          <div class="collect-config">
+            <div class="field">
+              <label for="input-post-url">Instagram post share link</label>
+              <input
+                id="input-post-url"
+                type="url"
+                placeholder="https://www.instagram.com/p/SHORTCODE/"
+                autocomplete="off"
+                inputmode="url"
+              />
+              <small class="help">
+                Turn off mock mode to fetch real comments (requires Meta/Instagram Graph API access token on the backend).
+              </small>
+            </div>
+            <label class="toggle">
+              <input id="toggle-mock" type="checkbox" checked />
+              <span class="toggle-ui" aria-hidden="true"></span>
+              <span class="toggle-text">Use mock demo data</span>
+            </label>
+          </div>
+          <div class="actions">
+            <button id="btn-collect" class="btn btn-primary">
+              <span class="btn-icon">📥</span> Collect Comments
+            </button>
+            <button id="btn-analyze" class="btn btn-secondary">
+              <span class="btn-icon">🧠</span> Run Analysis
+            </button>
+          </div>
+        </div>
+        <div class="quick-stats" id="quick-stats">
+          <div class="stat-card pastel-mint">
+            <span class="stat-value" id="stat-total">0</span>
+            <span class="stat-label">Total Comments</span>
+          </div>
+          <div class="stat-card pastel-rose">
+            <span class="stat-value" id="stat-positive">0%</span>
+            <span class="stat-label">Positive</span>
+          </div>
+          <div class="stat-card pastel-lavender">
+            <span class="stat-value" id="stat-negative">0%</span>
+            <span class="stat-label">Negative</span>
+          </div>
+          <div class="stat-card pastel-peach">
+            <span class="stat-value" id="stat-neutral">0%</span>
+            <span class="stat-label">Neutral</span>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <span class="feature-icon">📱</span>
+            <h3>Instagram Collection</h3>
+            <p>Automated comment gathering from your posts</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🤖</span>
+            <h3>LLM Analysis</h3>
+            <p>Context, tone & intent understanding</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">📊</span>
+            <h3>Visual Analytics</h3>
+            <p>Graphs and detailed breakdowns</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">⚠️</span>
+            <h3>PR Risk Detection</h3>
+            <p>Identify reputation threats early</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comments -->
+      <section id="view-comments" class="view">
+        <h2 class="section-title">Collected Comments</h2>
+        <div class="comments-list" id="comments-list">
+          <p class="empty-state">Collect comments first to see them here.</p>
+        </div>
+      </section>
+
+      <!-- Preprocessing -->
+      <section id="view-preprocessing" class="view">
+        <h2 class="section-title">Data Ingestion & Preprocessing</h2>
+        <div class="flow-pipeline">
+          <div class="flow-step">Raw Comments</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">Preprocessing</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">Cleaned Text</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">NLP Engine</div>
+        </div>
+        <div class="preprocessing-content" id="preprocessing-content">
+          <p class="empty-state">Collect and run analysis to see preprocessing pipeline.</p>
+        </div>
+      </section>
+
+      <!-- Categorization -->
+      <section id="view-categorization" class="view">
+        <h2 class="section-title">Comment Categorization</h2>
+        <p class="section-desc">Classification: Pricing | Delivery | Complaints | Enquiries | Other</p>
+        <div class="category-grid" id="category-grid"></div>
+        <div class="categorized-comments" id="categorized-comments"></div>
+      </section>
+
+      <!-- Analytics -->
+      <section id="view-analytics" class="view">
+        <h2 class="section-title">Sentiment Analytics</h2>
+        <div class="analytics-grid">
+          <div class="chart-card">
+            <h3>Sentiment Distribution</h3>
+            <div class="donut-chart" id="donut-chart"></div>
+            <div class="chart-legend" id="donut-legend"></div>
+          </div>
+          <div class="chart-card">
+            <h3>Emotion Breakdown</h3>
+            <div class="bar-chart" id="bar-chart"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PR Risks -->
+      <section id="view-pr-risks" class="view">
+        <h2 class="section-title">PR Risk Identification</h2>
+        <div class="risk-summary" id="risk-summary"></div>
+        <div class="risks-list" id="risks-list"></div>
+      </section>
+
+      <!-- Executive Report -->
+      <section id="view-report" class="view">
+        <h2 class="section-title">Executive Summary</h2>
+        <div class="report-actions">
+          <button id="btn-download-pdf" class="btn btn-primary">
+            <span class="btn-icon">📄</span> Download PDF Report
+          </button>
+        </div>
+        <div class="report-content" id="report-content"></div>
+      </section>
+
+      <!-- Positive Highlights & Feedbacks -->
+      <section id="view-highlights" class="view">
+        <h2 class="section-title">Customer Facing Dashboard</h2>
+        <div class="highlights-grid">
+          <div class="highlight-card">
+            <h3>💚 Positive Highlights</h3>
+            <div id="positive-highlights"></div>
+          </div>
+          <div class="highlight-card">
+            <h3>💬 Feedback Summary</h3>
+            <div id="feedback-summary"></div>
+          </div>
+          <div class="highlight-card">
+            <h3>💡 Expert Opinions</h3>
+            <div id="expert-opinions"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Sentiment Pulse — LLM-powered social media intelligence</p>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
